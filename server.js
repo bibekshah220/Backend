@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import connectDB from './config/database.js';
 
 
 
@@ -15,6 +16,8 @@ const corsOptions = {
   credentials: true,
 
 };
+
+connectDB();
 
 app.use(cors(corsOptions));
 app.use(express.json());
