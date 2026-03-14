@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/database.js';
 import errorHandler from './middleware/errorHandler.js';
+import authRoutes from './routes/authRoute.js';
 
 
 
@@ -33,6 +34,8 @@ app.get("/api/health", (req, res) => {
      });
 });
 
+// api routes
+app.use("/api/auth", authRoutes);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
