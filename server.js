@@ -1,17 +1,35 @@
-const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
 
 
 
-const app = express()
+dotenv.config();
 
-app.get('/about', (req, res) => {
-    res.send('About Page')
-})  
+const app = express();
 
-app.get("/contact", (req, res) => {
-    res.send('Contact Page')
-})
+const PORT = process.env.PORT || 8080;
 
-app.listen(8080, () => {
-    console.log('Server is running on port 8080');
-})
+const corsOptions = {
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true,
+
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.get("/api/health", (req, res) => {
+    res.json({ 
+        status: "ok",
+        message:"live class server is running",
+        timestamp: new Date().toISOString()
+     });
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
