@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/database.js';
+import errorHandler from './middleware/errorHandler.js';
 
 
 
@@ -32,6 +33,7 @@ app.get("/api/health", (req, res) => {
      });
 });
 
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
